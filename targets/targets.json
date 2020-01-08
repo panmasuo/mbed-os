@@ -2169,7 +2169,7 @@
             "NXP_LPADC",
             "MBED_TICKLESS"
         ],
-        "components_add": ["FLASHIAP"],
+        "components_add": ["FLASHIAP", "SPIF"],
         "extra_labels_add": [
             "M33_NS",
             "PSA",
