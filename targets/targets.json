@@ -2160,6 +2160,7 @@
         "inherits": ["NSPE_Target", "LPC55S69"],
         "core": "Cortex-M33FE-NS",
         "supported_toolchains": ["ARMC6", "GCC_ARM", "IAR"],
+        "detect_code": ["0360"],
         "macros_add": [
             "__STARTUP_CLEAR_BSS",
             "MBED_FAULT_HANDLER_DISABLED",
