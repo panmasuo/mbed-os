@@ -2175,6 +2175,7 @@
             "PSA",
             "TFM"
         ],
+        "extra_labels_remove": ["LPCXpresso"],
         "device_has_add": [
             "USTICKER",
             "RTC",
