@@ -447,36 +447,8 @@ BlockDevice *_get_blockdevice_FLASHIAP(bd_addr_t start_address, bd_size_t size)
 BlockDevice *_get_blockdevice_SPIF(bd_addr_t start_address, bd_size_t size)
 {
 #if COMPONENT_SPIF
-
-    bd_addr_t aligned_end_address;
-    bd_addr_t aligned_start_address;
-
-    static SPIFBlockDevice bd(
-        MBED_CONF_SPIF_DRIVER_SPI_MOSI,
-        MBED_CONF_SPIF_DRIVER_SPI_MISO,
-        MBED_CONF_SPIF_DRIVER_SPI_CLK,
-        MBED_CONF_SPIF_DRIVER_SPI_CS,
-        MBED_CONF_SPIF_DRIVER_SPI_FREQ
-    );
-
-    if (bd.init() != MBED_SUCCESS) {
-        tr_error("KV Config: SPIFBlockDevice init fail");
-        return NULL;
-    }
-
-    if (start_address == 0 && size == 0) {
-        return &bd;
-    }
-
-    //If address and size were specified use SlicingBlockDevice to get the correct block device size and start address.
-    if (_get_addresses(&bd, start_address, size, &aligned_start_address, &aligned_end_address) != 0) {
-        tr_error("KV Config: Fail to get addresses for SlicingBlockDevice.");
-        return NULL;
-    }
-
-    static SlicingBlockDevice sbd(&bd, aligned_start_address, aligned_end_address);
-    return &sbd;
-
+    static BlockDevice *bd = BlockDevice::get_default_instance();
+    return bd;
 #else
     return NULL;
 #endif
